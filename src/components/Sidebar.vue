@@ -33,7 +33,8 @@
         links: [
           {link: '/home', title: 'Home', icon: 'home'},
           {link: '/page1', title: 'Página 1', icon: 'check_circle'},
-          {link: '/page2', title: 'Página 2', icon: 'class'}
+          {link: '/page2', title: 'Página 2', icon: 'class'},
+          {link: '/todos', title: 'Todos', icon: 'assignment'}
         ]
       }
     },

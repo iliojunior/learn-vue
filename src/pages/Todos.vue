@@ -1,42 +1,16 @@
 <template lang="pug">
-  v-data-table.elevation-1(
-  :headers="headers"
-    :items="todoList"
-  )
-    template(
-    slot="items"
-    scope="props"
-    )
-      tr
-        td {{ props.item.name }}
-        td {{ props.item.description }}
-
+  #todos
+    TodoList
+    v-btn(
+    to="todos/new"
+    ) Cadastrar Novo
 </template>
 
 <script>
+  import TodoList from '@/components/TodoList'
+
   export default {
     name: 'todos',
-    data () {
-      return {
-        todoList: [{name: 'Testeasd', description: 'Description'}],
-        headers: [
-          {sortable: false, text: 'Nome', value: 'name', align: 'left'},
-          {sortable: false, text: 'Descrição', value: 'decription', align: 'left'}
-        ]
-      }
-    },
-    beforeMount () {
-      this.loadData()
-    },
-    methods: {
-      loadData () {
-        this
-          .$http
-          .get('api/todos')
-          .then((response) => {
-            this.todoList = response.body
-          })
-      }
-    }
+    components: {TodoList}
   }
 </script>

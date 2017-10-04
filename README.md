@@ -1,6 +1,19 @@
-# my-first-project-test
+# Learning Vue JS
 
-> Project for learning vue
+> Project for learning vue.js
+
+## Usage
+
+- [vue.js 2.x](https://vuejs.org/)
+- [vuetify 0.15](https://vuetifyjs.com)
+- [vue-router 2](https://router.vuejs.org/en/)
+- [vue-resource 1.3.4](https://github.com/pagekit/vue-resource)
+- [pugjs 2.x](https://pugjs.org)
+- [stylus-lang](http://stylus-lang.com/)
+
+## Requirements
+
+- [npm](https://www.npmjs.com/)
 
 ## Build Setup
 

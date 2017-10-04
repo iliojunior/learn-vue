@@ -4,6 +4,8 @@ import Home from '@/pages/Home'
 import Page1 from '@/pages/Page1'
 import Page2 from '@/pages/Page2'
 import Todos from '@/pages/Todos'
+import NewTodo from '@/pages/NewTodo'
+import TodoLayout from '@/pages/TodoLayout'
 
 Vue.use(Router)
 
@@ -30,8 +32,19 @@ export default new Router({
     },
     {
       path: '/todos',
-      name: 'todos',
-      component: Todos
+      component: TodoLayout,
+      children: [
+        {
+          path: '/',
+          name: 'todos',
+          component: Todos
+        },
+        {
+          path: 'new',
+          name: 'newTodo',
+          component: NewTodo
+        }
+      ]
     }
   ]
 })

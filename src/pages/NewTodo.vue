@@ -24,12 +24,12 @@
     v-snackbar(
     :timeout="timeout"
     top=true
-    v-model="snackbar"
+    v-model="showSnackbar"
     )
       | {{ textResponse }}
       v-btn.pink--text(
       flat
-      @click.native="snackbar = false"
+      @click.native="closeSnackbar"
       ) Close
 </template>
 
@@ -42,7 +42,7 @@
         nameRules: [(v) => !!v || 'Nome é obrigatório'],
         drescriptionRules: [(v) => !!v || 'A descrição é obrigatória'],
         textResponse: '',
-        snackbar: false,
+        showSnackbar: false,
         timeout: 3000,
         todo: {
           name: '',
@@ -65,7 +65,7 @@
           .then((response) => {
             if (response.status === 201) {
               self.textResponse = 'Cadastrado com sucesso!'
-              self.snackbar = true
+              self.showSnackbar = true
               setTimeout(() => {
                 self.$router.push('/todos')
               }, self.timeout)
@@ -76,6 +76,10 @@
 
             alert(messageError)
           })
+      },
+      closeSnackbar () {
+        this.showSnackbar = false
+        this.$router.push('/todos')
       }
     }
   }

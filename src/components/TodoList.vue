@@ -1,12 +1,8 @@
 <template lang="pug">
   #todoList
-    v-text-field(
-    xs5
-    append-icon="search"
-    label="Busca"
-    single-line
-    v-model="searchTerm"
-    )
+    v-layout(justify-end row wrap)
+      SearchInput
+
     v-data-table(
     :headers="headers"
       :items="todoList"
@@ -14,8 +10,9 @@
         :pagination.sync="pagination"
         :total-items="totalItems"
         :rowsPerPageItems="rowsPerPageItems"
-    noDataText="Nenhum resultado encontrado",
+    noDataText="Nenhum resultado encontrado"
     rowsPerPageText="Resultados por página:"
+    noResultsText="Nenhum resultado encontrado"
     )
       template(
       slot="items"
@@ -33,8 +30,13 @@
 </template>
 
 <script>
+  import SearchInput from '@/components/SearchInput'
+
   export default {
     name: 'todosList',
+    components: {
+      'searchInput': SearchInput
+    },
     data () {
       return {
         todoList: [],
@@ -75,8 +77,7 @@
           url += '&sortBy=' + sortBy + '&descending=' + descending.toString()
         }
 
-        this
-          .$http
+        return this.$http
           .get(url)
           .then((response) => {
             self.todoList = response.body.data
@@ -85,9 +86,25 @@
           })
       },
       deleteTodo (idTodo) {
+        let existe = false
+
+        if (this.todoList.length === 0) {
+          throw new Error('Todo não existe')
+        }
+
+        this.todoList.forEach((item) => {
+          if (item.id === idTodo) {
+            existe = true
+          }
+        })
+
+        if (!existe) {
+          throw new Error('Todo não existe')
+        }
+
         const self = this
         self.loading = true
-        this
+        return this
           .$http
           .delete('api/todos/' + idTodo)
           .then(() => {

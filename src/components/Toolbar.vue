@@ -6,7 +6,7 @@
     v-toolbar-side-icon(
     @click.stop="toggleDrawer"
     )
-    v-toolbar-title Sistema de alguma coisa
+    v-toolbar-title Controle de Odin
     v-spacer
 </template>
 
